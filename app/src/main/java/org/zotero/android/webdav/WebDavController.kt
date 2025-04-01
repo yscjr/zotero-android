@@ -199,10 +199,11 @@ class WebDavController @Inject constructor(
     }
 
     private suspend fun checkIsDav(url: String): CustomResult<ResponseBody> {
+        Timber.e("Zotero WebDavController: checkIsDav start")
         val networkResult = safeApiCall {
             provideWebDavApi().options(url)
         }
-
+        Timber.e("Zotero WebDavController: safeApiCall end")
         val httpCode = networkResult.resultHttpCode
         if (!listOf(200, 204, 404).contains(httpCode)) {
             return CustomResult.GeneralError.UnacceptableStatusCode(httpCode!!, null)
