@@ -147,6 +147,6 @@ jobs:
           makeLatest: true
           allowUpdates: true
           name: ${{ steps.metadata.outputs.value }}
-          body: 'Please see https://github.com/yscjr/zotero-android/commits/master/ for changelog.'
+          body: 'Please see https://github.com/zotero/zotero-android/commits/master/ for changelog.'
           artifacts: "app/build/outputs/apk/dev/debug/*.apk"
           token: ${{ secrets.GITHUB_TOKEN }}
