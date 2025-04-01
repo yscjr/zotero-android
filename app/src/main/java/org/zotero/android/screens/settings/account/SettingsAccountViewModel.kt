@@ -348,15 +348,15 @@ internal class SettingsAccountViewModel @Inject constructor(
     }
 
     private fun verify(tryCreatingZoteroDir: Boolean) {
-        if (viewState.scheme == WebDavScheme.http && !isAllowedHttpHost()) {
-            updateState {
-                copy(
-                    webDavVerificationResult = CustomResult.GeneralError.CodeError(WebDavError.Verification.localHttpWebdavHostNotAllowed),
-                    isVerifyingWebDav = false
-                )
-            }
-            return
-        }
+        // if (viewState.scheme == WebDavScheme.http && !isAllowedHttpHost()) {
+        //     updateState {
+        //         copy(
+        //             webDavVerificationResult = CustomResult.GeneralError.CodeError(WebDavError.Verification.localHttpWebdavHostNotAllowed),
+        //             isVerifyingWebDav = false
+        //         )
+        //     }
+        //     return
+        // }
 
         if (!viewState.isVerifyingWebDav) {
             updateState {
