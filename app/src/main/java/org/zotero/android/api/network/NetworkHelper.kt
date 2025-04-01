@@ -29,16 +29,20 @@ object NetworkHelper {
         val isNoNetworkError = e is UnknownHostException || e is SocketTimeoutException
         val isNoCertificateError = e is SSLHandshakeException
         Timber.e("Zotero WebDavController: parseNetworkException")
+        if (isNoNetworkError) {
+            Timber.e("Zotero WebDavController: NO_INTERNET_CONNECTION_HTTP_CODE")
+        } else if (isNoCertificateError){
+            Timber.e("Zotero WebDavController: NO_HTTPS_CERTIFICATE_FOUND")
+        } else {
+            Timber.e("Zotero WebDavController: UNKNOWN_NETWORK_EXCEPTION_HTTP_CODE")
+        }
         return CustomResult.GeneralError.NetworkError(
             httpCode = if (isNoNetworkError) {
                 CustomResult.GeneralError.NetworkError.NO_INTERNET_CONNECTION_HTTP_CODE
-                Timber.e("Zotero WebDavController: NO_INTERNET_CONNECTION_HTTP_CODE")
             } else if (isNoCertificateError){
                 CustomResult.GeneralError.NetworkError.NO_HTTPS_CERTIFICATE_FOUND
-                Timber.e("Zotero WebDavController: NO_HTTPS_CERTIFICATE_FOUND")
             } else {
                 CustomResult.GeneralError.NetworkError.UNKNOWN_NETWORK_EXCEPTION_HTTP_CODE
-                Timber.e("Zotero WebDavController: UNKNOWN_NETWORK_EXCEPTION_HTTP_CODE")
             },
             stringResponse = e.localizedMessage,
         )
