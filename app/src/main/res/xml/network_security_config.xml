@@ -7,6 +7,7 @@
     </domain-config> -->
     <base-config>
         <trust-anchors>
+            <certificates src="@raw/isrg_root_x1" /> 
             <certificates src="system" />
         </trust-anchors>
     </base-config>
